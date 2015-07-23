@@ -1,0 +1,28 @@
+<head>
+  <title>Scoretto</title>
+</head>
+
+<template name="main">
+  {{> yield "header"}}
+  {{> yield "body"}}
+  {{> yield "footer"}}
+</template>
+
+<template name="loading">
+  <h1>Loading...</h1>
+</template>
+
+<template name="hello">
+  <h1>Hi there</h1>
+</template>
+
+<template name="nameprompt">
+  <form method="post"><!-- to prevent URL changes on submit -->
+    <input type="text" id="name" placeholder="Your name, please" />
+    <input type="submit" id="namesubmit" value="Let's play" />
+  </form>
+</template>
+
+<template name="gametitle">
+  <h1>{{title}}</h1>
+</template>
