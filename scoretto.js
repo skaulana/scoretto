@@ -65,7 +65,9 @@ if (Meteor.isClient) {
   
   Template.userlist.helpers({
     players: function() {
-      return ScoreboardStore.find({}, {sort: {score: -1}});
+      var players = ScoreboardStore.find({}, {sort: {score: -1}});
+      if (players.count() == 0) Router.go('/setup'); // resets client quickly during debugging
+      else return players;
     },
     icon: function() {
       return this.name === undefined
@@ -96,6 +98,11 @@ if (Meteor.isClient) {
   Template.gameactions.events({
     'click #scoreround': function(e) {
       Router.go('/score');
+    },
+    'click #exitgame': function(e) {
+      Meteor.call('disconnectWithUUID', Session.get('uuid'));
+      Session.clear();
+      Router.go('/setup'); // TODO: replay client startup logic instead
     }
   });
   
@@ -119,6 +126,9 @@ Meteor.methods({
     if (name !== undefined) payload["$set"]["name"] = name; // send name when passed as arg
     // console.log('Client connecting as ' + clientid);
     ScoreboardStore.upsert({client: clientid}, payload);
+  },
+  disconnectWithUUID: function (clientid) {
+    ScoreboardStore.remove({client: clientid});
   },
   scoreRound: function (clientid, score) {
     ScoreboardStore.update(
@@ -151,7 +161,7 @@ if (Meteor.isServer) {
         for (var i = 0; i < scores.length; i++) {
           var newcards = 10;          
           if (scores[i].score > minscore + 10) {
-            newcards += Math.ceil((scores[i].score - minscore - 10) / 5);
+            newcards += Math.ceil((scores[i].score - minscore - 10 + 1) / 5);
           }
           ScoreboardStore.update({client: scores[i].client}, {$set: {cards: newcards}});
         }
