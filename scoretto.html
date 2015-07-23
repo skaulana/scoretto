@@ -26,3 +26,35 @@
 <template name="gametitle">
   <h1>{{title}}</h1>
 </template>
+
+<template name="userlist">
+  <ul>
+  {{#each players}}
+    <li>
+      <span>{{icon}}</span>
+      <span>{{name}}</span>
+      <span>{{score}}</span>
+      <span>{{lastroundsign}}{{lastround}}</span>
+    </li>
+  {{/each}}
+  </ul>
+</template>
+
+<template name="gameactions">
+  <div>{{message}}</div>
+  <button id="scoreround">Score last round</button>
+  <!-- TODO: reset scores, options -->
+</template>
+
+<template name="scoretitle">
+  <h1>How'd you do?</h1>
+</template>
+
+<template name="scoreprompt">
+  <form method="post"><!-- to prevent URL changes on submit -->
+    <div>+1 for each card you played</div>
+    <div>-2 for each card left in your pile</div>
+    <input type="text" id="score" placeholder="0" />
+    <input type="submit" id="scoresubmit" value="OK" />
+  </form>
+</template>
