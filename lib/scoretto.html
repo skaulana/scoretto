@@ -9,8 +9,12 @@
   <div class="container-fluid">
     {{> yield "header"}}
     {{> yield "body"}}
-    {{> yield "footer"}}
   </div>
+  <footer class="navbar-fixed-bottom">
+    <div class="container-fluid">
+      {{> yield "footer"}}
+    </div>
+  </footer>
 </template>
 
 <template name="loading">
