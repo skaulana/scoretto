@@ -9,7 +9,7 @@ Template.gametitle.helpers({
     if (iScored == 0 && allScored == 0) { // TODO: consolidate with gameactions.helpers
       var cards = ScoreboardStore.findOne({client: Session.get('uuid')}).cards;
       return "Deal " + cards + " card" + (cards == 1 ? "" : "s") + ", "
-        + ScoreboardStore.findOne({client: Session.get('uuid')}).name;
+        + Session.get('name');
     }
     else {
       return "Get ready for next round...";
