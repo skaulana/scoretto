@@ -4,13 +4,14 @@
 var sendPileSizes = function(id, fields) {
   if (ScoreboardStore.find({lastround: {$exists: true}}).count()
       == ScoreboardStore.find().count()) {
-        
+
     var scores = ScoreboardStore.find({}, {sort: {score: 1}}).fetch();
+    if (scores == false) return; // empty game
     var minscore = scores[0].score;
-        
+
     // clear lastround values from DB first to avoid race
     ScoreboardStore.update({}, {$unset: {lastround: ""}}, {multi: true});
-      
+
     // then send down correct pile count: +1 per 5 over 10 from min score
     for (var i = 0; i < scores.length; i++) {
       var newcards = 10;          
