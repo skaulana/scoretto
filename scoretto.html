@@ -3,9 +3,11 @@
 </head>
 
 <template name="main">
-  {{> yield "header"}}
-  {{> yield "body"}}
-  {{> yield "footer"}}
+  <div class="container-fluid">
+    {{> yield "header"}}
+    {{> yield "body"}}
+    {{> yield "footer"}}
+  </div>
 </template>
 
 <template name="loading">
@@ -13,13 +15,17 @@
 </template>
 
 <template name="hello">
-  <h1>Hi there</h1>
+  <h1>Hi ヽ(◕ヮ◕ヽ)</h1>
 </template>
 
 <template name="nameprompt">
   <form method="post"><!-- to prevent URL changes on submit -->
-    <input type="text" id="name" placeholder="Your name, please" />
-    <input type="submit" id="namesubmit" value="Let's play" />
+    <div class="input-group">
+      <input type="text" id="name" class="form-control" placeholder="Your name, please" />
+      <span class="input-group-btn">
+        <button type="submit" id="namesubmit" class="btn btn-primary">Let's play!</button>
+      </span>
+    </div>
   </form>
 </template>
 
@@ -28,34 +34,46 @@
 </template>
 
 <template name="userlist">
-  <ul>
+  <ul class="list-group">
   {{#each players}}
-    <li>
-      <span>{{icon}}</span>
-      <span>{{name}}</span>
-      <span>{{score}}</span>
-      <span>{{lastroundsign}}{{lastround}}</span>
+    <li class="list-group-item">
+      <span class="iconic">{{icon}}</span>
+      {{name}}
+      <span class="badge">{{score}}</span>
+      {{#if lastround}}
+        {{#if lastroundsign}}
+          <span class="label label-success">{{lastroundsign}}{{lastround}}</span>
+        {{else}}
+          <span class="label label-danger">{{lastround}}</span>
+        {{/if}}
+      {{/if}}
     </li>
   {{/each}}
   </ul>
 </template>
 
 <template name="gameactions">
-  <div>{{message}}</div>
-  <button id="scoreround">Score last round</button>
-  <button id="exitgame">Exit game</button>
+  {{#if message}}
+    <div class="alert alert-warning alert-dismissible" role="alert">{{message}}</div>
+  {{/if}}
+  <button id="scoreround" class="btn btn-primary">Score last round</button>
+  <button id="exitgame" class="btn btn-default">Exit game</button>
   <!-- TODO: reset scores, options -->
 </template>
 
 <template name="scoretitle">
-  <h1>How'd you do?</h1>
+  <h1>How'd it go?</h1>
 </template>
 
 <template name="scoreprompt">
   <form method="post"><!-- to prevent URL changes on submit -->
-    <div>+1 for each card you played</div>
-    <div>-2 for each card left in your pile</div>
-    <input type="text" id="score" placeholder="0" />
-    <input type="submit" id="scoresubmit" value="OK" />
+    <div class="input-group">
+      <input type="text" id="score" class="form-control" placeholder="0" />
+      <span class="input-group-btn">
+        <button type="submit" id="scoresubmit" class="btn btn-primary">OK</button>
+      </span>
+    </div>
+    <p><span class="label label-success">+1</span> for each card you played</p>
+    <p><span class="label label-danger">-2</span> for each card left in your pile</p>
   </form>
 </template>

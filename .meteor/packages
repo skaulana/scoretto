@@ -6,8 +6,8 @@
 
 meteor-platform
 autopublish
-insecure
 iron:router
 u2622:persistent-session
 jquery
 jaywon:meteor-node-uuid
+twbs:bootstrap

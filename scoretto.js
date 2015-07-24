@@ -1,4 +1,4 @@
-// DB access - assuming insecure and autopublish for now...
+// DB access assumes autopublish for now...
 ScoreboardStore = new Mongo.Collection("scores");
 
 // Routing
@@ -55,7 +55,8 @@ if (Meteor.isClient) {
 
       if (iScored == 0 && allScored == 0) { // TODO: consolidate with gameactions.helpers
         var cards = ScoreboardStore.findOne({client: Session.get('uuid')}).cards;
-        return "Draw " + cards + " card" + (cards == 1 ? "" : "s");
+        return "Deal " + cards + " card" + (cards == 1 ? "" : "s") + ", "
+          + ScoreboardStore.findOne({client: Session.get('uuid')}).name;
       }
       else {
         return "Get ready for next round...";
@@ -71,8 +72,7 @@ if (Meteor.isClient) {
     },
     icon: function() {
       return this.name === undefined
-         ? "[☺]"
-         : "[" + this.name.charAt(0) + "]"; // TODO: use actual images later
+         ? "?" : this.name.charAt(0); // TODO: use actual images later
     },
     lastroundsign: function() {
       return this.lastround !== undefined && this.lastround >= 0 ? "+" : "";

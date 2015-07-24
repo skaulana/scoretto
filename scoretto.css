@@ -1,1 +1,10 @@
 /* CSS declarations go here */
+.iconic {
+  font-family: ‘Palatino Linotype’, ‘Book Antiqua’, Palatino, serif;
+  color: #666fcf;
+  font-size: 36px;
+  line-height: 50%;
+  vertical-align: middle;
+  padding: 0px 5px;
+  margin-right: 5px;
+}
