@@ -1,13 +1,17 @@
 // Game.js
 // Client logic for main game (scoreboard) screen
 
+// shorthand DB calls
+function allScored() { return ScoreboardStore.find({lastround: {$exists: true}}).count(); }
+function iScored() { return ScoreboardStore.find({lastround: {$exists: true}, client: Session.get('uuid')}).count(); }
+function allVoted() { return ScoreboardStore.find({reset: {$exists: true}}).count(); }
+function iVoted() { return ScoreboardStore.find({reset: {$exists: true}, client: Session.get('uuid')}).count(); }
+function findMe() { return ScoreboardStore.findOne({client: Session.get('uuid')}); }
+
 Template.gametitle.helpers({
   title: function() {
-    var allScored = ScoreboardStore.find({lastround: {$exists: true}}).count();
-    var iScored = ScoreboardStore.find({lastround: {$exists: true}, client: Session.get('uuid')}).count();
-
-    if (iScored == 0 && allScored == 0) { // TODO: consolidate with gameactions.helpers
-      var cards = ScoreboardStore.findOne({client: Session.get('uuid')}).cards;
+    if (iScored() == 0 && allScored() == 0) {
+      var cards = findMe().cards;
       return "Deal " + cards + " card" + (cards == 1 ? "" : "s") + ", "
         + Session.get('name');
     }
@@ -34,23 +38,31 @@ Template.userlist.helpers({
   
 Template.gameactions.helpers({
   message: function() {
-    var allScored = ScoreboardStore.find({lastround: {$exists: true}}).count();
-    var iScored = ScoreboardStore.find({lastround: {$exists: true}, client: Session.get('uuid')}).count();
+    var noScores = iScored() == 0 && allScored() == 0;
+    var needMyScore = iScored() == 0;
+    var votePending = allVoted() != 0;
+    var needOtherScores = allScored() < ScoreboardStore.find().count();
 
-    var noScores = iScored == 0 && allScored == 0;
-    var needMyScore = iScored == 0;
-    var needOtherScores = allScored < ScoreboardStore.find().count();
-      
-    if (noScores) return "";
+    if (votePending) return resetThreshold() + " votes needed to reset scores"; 
+    else if (noScores) return "";
     else if (needMyScore) return "Waiting for your score from last round";
     else if (needOtherScores) return "Waiting for others to finish scoring";
     else return "Waiting for the server";
+  },
+  resetcss: function() {
+    return iVoted() ? "btn-warning" : "btn-default";
+  },
+  resetstring: function() {
+    return iVoted() ? "<span class='glyphicon glyphicon-ok'></span> Reset" : "Reset";
   }
 });
   
 Template.gameactions.events({
   'click #scoreround': function(e) {
     Router.go('/score');
+  },
+  'click #votereset': function(e) {
+    Meteor.call('toggleReset', Session.get('uuid'));
   },
   'click #exitgame': function(e) {
     Meteor.call('disconnectWithUUID', Session.get('uuid'));

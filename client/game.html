@@ -12,6 +12,9 @@
       <span class="iconic">{{icon}}</span>
       {{name}}
       <span class="badge">{{score}}</span>
+      {{#if reset}}
+        <span class="label label-warning">reset?</span>
+      {{/if}}
       {{#if lastround}}
         {{#if lastroundsign}}
           <span class="label label-success">{{lastroundsign}}{{lastround}}</span>
@@ -29,6 +32,6 @@
     <div class="alert alert-warning alert-dismissible" role="alert">{{message}}</div>
   {{/if}}
   <button id="scoreround" class="btn btn-primary">Score last round</button>
+  <button id="votereset" class="btn {{resetcss}}">{{{resetstring}}}</button>
   <button id="exitgame" class="btn btn-default">Leave</button>
-  <!-- TODO: reset scores, options -->
 </template>
