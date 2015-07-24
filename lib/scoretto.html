@@ -1,0 +1,18 @@
+<!-- Scoretto.html -->
+<!-- UI scaffolding for Meteor app -->
+
+<head>
+  <title>Scoretto</title>
+</head>
+
+<template name="main">
+  <div class="container-fluid">
+    {{> yield "header"}}
+    {{> yield "body"}}
+    {{> yield "footer"}}
+  </div>
+</template>
+
+<template name="loading">
+  <h1>Loading...</h1>
+</template>
