@@ -8,7 +8,7 @@
 <template name="userlist">
   <ul class="list-group">
   {{#each players}}
-    <li class="list-group-item">
+    <li class="list-group-item {{selectedcss}}" data-playerid="{{client}}">
       <span class="iconic">{{icon}}</span>
       {{name}}
       <span class="badge">{{score}}</span>
@@ -34,4 +34,9 @@
   <button id="scoreround" class="btn btn-primary">Score last round</button>
   <button id="votereset" class="btn {{resetcss}}">{{{resetstring}}}</button>
   <button id="exitgame" class="btn btn-default">Leave</button>
+</template>
+
+<template name="useractions">
+  <button id="voteboot" class="btn btn-danger">Boot {{name}}</button>
+  <button id="backtogame" class="btn btn-default">Cancel</button>
 </template>

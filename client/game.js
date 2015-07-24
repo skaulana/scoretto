@@ -11,6 +11,7 @@ function findMe() { return ScoreboardStore.findOne({client: Session.get('uuid')}
 Template.gametitle.helpers({
   title: function() {
     if (iScored() == 0 && allScored() == 0) {
+      if (findMe() === undefined) Router.go('/setup'); // you got booted
       var cards = findMe().cards;
       return "Deal " + cards + " card" + (cards == 1 ? "" : "s") + ", "
         + Session.get('name');
@@ -27,12 +28,25 @@ Template.userlist.helpers({
     if (players.count() == 0) Router.go('/setup'); // resets client quickly during debugging
     else return players;
   },
+  selectedcss: function() {
+    if (this.client == Session.get('playerid')) return "active"; // TODO: always prefer Session.equals()
+    else return "";
+  },
   icon: function() {
     return this.name === undefined
        ? "?" : this.name.charAt(0); // TODO: use actual images later
   },
   lastroundsign: function() {
     return this.lastround !== undefined && this.lastround >= 0 ? "+" : "";
+  }
+});
+
+Template.userlist.events({
+  'click li': function(e) {
+    var clickedplayer = $(e.target).data('playerid');
+    if (clickedplayer == Session.get('uuid')) return false; // don't allow selecting self
+    else if (clickedplayer == Session.get('playerid')) Router.go('/game'); // unselect player
+    else Router.go('/game/' + clickedplayer); // select player
   }
 });
   
@@ -68,5 +82,15 @@ Template.gameactions.events({
     Meteor.call('disconnectWithUUID', Session.get('uuid'));
     Session.clear();
     Router.go('/setup'); // TODO: replay client startup logic instead
+  }
+});
+
+Template.useractions.events({
+  'click #voteboot': function(e) {
+    Meteor.call('bootUUID', Session.get('uuid'), Session.get('playerid'));
+    Router.go('/game');
+  },
+  'click #backtogame': function(e) {
+    Router.go('/game');
   }
 });
