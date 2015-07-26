@@ -1,17 +1,12 @@
 <!-- Setup.html -->
 <!-- UI templates for client first run -->
 
-<template name="hello">
-  <h1>Hi ヽ(◕ヮ◕ヽ)</h1>
-</template>
-
 <template name="nameprompt">
-  <form method="post"><!-- to prevent URL changes on submit -->
-    <div class="input-group">
+  <div class="vertical-center">
+    <form method="post"><!-- to prevent URL changes on submit -->
+      <h1>Hi ヽ(◕ヮ◕ヽ)</h1>
       <input type="text" id="name" class="form-control" placeholder="Your name, please" />
-      <span class="input-group-btn">
-        <button type="submit" id="namesubmit" class="btn btn-primary">Let's play!</button>
-      </span>
-    </div>
-  </form>
+      <button type="submit" id="namesubmit" class="btn btn-primary center-block mini-space">Let's play!</button>
+    </form>
+  </div>
 </template>

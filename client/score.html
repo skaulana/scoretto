@@ -2,21 +2,22 @@
 <!-- UI templates for scoring (input) screen -->
 
 <template name="scoretitle">
-  <h1>How'd it go?</h1>
+  <h1>How'd the round go?</h1>
 </template>
 
 <template name="scoreprompt">
   <form method="post"><!-- to prevent URL changes on submit -->
     <div class="input-group">
-      <input type="text" id="score" class="form-control" autofocus />
+      <input type="text" id="score" class="form-control" placeholder="Your score" autofocus />
       <span class="input-group-btn">
         <button type="submit" id="scoresubmit" class="btn btn-primary">OK</button>
       </span>
     </div>
     <br />
     <div class="well well-sm">
-      <span class="label label-success">+1</span> for each card you played<br />
-      <span class="label label-danger">-2</span> for each card left in your pile
+      <p>Enter your score for last round by adding:</p>
+      <p class="mini-li"><span class="label label-success">+1</span> for each card you played</p>
+      <p class="mini-li"><span class="label label-danger">-2</span> for each card left in your pile</p>
     </div>
   </form>
 </template>

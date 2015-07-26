@@ -1,19 +1,49 @@
 /* Scoretto.css */
 /* Template styles not already in Bootstrap */
 
+body {
+  background: url('/back.png');
+}
 .iconic {
   font-family: ‘Palatino Linotype’, ‘Book Antiqua’, Palatino, serif;
   color: #666fcf;
   font-size: 36px;
   line-height: 50%;
   vertical-align: middle;
-  padding: 0px 5px;
+  padding: 0 5px;
   margin-right: 5px;
 }
 .active .iconic {
   color: #fff;
 }
-
+.mini-space {
+  margin-top: 10px;
+}
+p.mini-li {
+  margin-left: 10px;
+  margin-bottom: 3px;
+}
+.vertical-center {
+  position: absolute;
+  min-height: 100%;  /* Fallback for vh unit */
+  min-height: 100vh;
+  display: -webkit-box;
+  display: -moz-box;
+  display: -ms-flexbox;
+  display: -webkit-flex;
+  display: flex; 
+  -webkit-box-align: center;
+  -webkit-align-items: center;
+  -moz-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  width: 95%;
+  -webkit-box-pack : center;
+  -moz-box-pack : center;
+  -ms-flex-pack : center;
+  -webkit-justify-content : center;
+  justify-content : center;
+}
 .navbar-fixed-bottom {
-  padding: 10px 0px;
+  padding: 10px 0;
 }
