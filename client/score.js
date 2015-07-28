@@ -1,6 +1,17 @@
 // Score.js
 // Client logic for scoring (input) screen
 
+function findMe() { return ScoreboardStore.findOne({client: Session.get('uuid')}); }
+
+Template.scoreprompt.helpers({
+  lastround: function() {
+    return (findMe().lastround === undefined) ? "" : findMe().lastround;
+  },
+  lastroundverb: function() {
+    return (findMe().lastround === undefined) ? "Enter" : "Update";
+  }
+});
+
 Template.scoreprompt.events({
   'submit': function(e) {
     var score = $('#score').val();
