@@ -56,8 +56,12 @@ Template.gameactions.helpers({
     var needMyScore = iScored() == 0;
     var votePending = allVoted() != 0;
     var needOtherScores = allScored() < ScoreboardStore.find().count();
+    var needOtherVotes = allVoted() < ScoreboardStore.find().count();
 
-    if (votePending) return resetThreshold() + " votes needed to reset scores"; 
+    if (votePending) {
+      if (needOtherVotes) return resetThreshold() + " votes needed to reset scores";
+      else return "Waiting for the server";
+    }
     else if (noScores) return "";
     else if (needMyScore) return "Waiting for your score from last round";
     else if (needOtherScores) return "Waiting for others to finish scoring";
