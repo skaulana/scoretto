@@ -1,3 +1,5 @@
+![Scoretto](https://raw.githubusercontent.com/skaulana/scoretto/master/public/icon180.png)
+
 # Scoretto
 
 A work-in-progress shared scorecard app for [Ligretto][1] parties,
