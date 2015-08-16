@@ -84,7 +84,8 @@ Template.gameactions.events({
   },
   'click #exitgame': function(e) {
     Meteor.call('disconnectWithUUID', Session.get('uuid'));
-    Session.clear();
+    Session.set('uuid', undefined);
+    Session.set('playerid', undefined);
     Router.go('/setup'); // TODO: replay client startup logic instead
   }
 });

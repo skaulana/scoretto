@@ -9,7 +9,12 @@ Template.nameprompt.events({
       Session.setPersistent('uuid', uuid.v4());
       Session.setPersistent('name', name);
       Meteor.call('connectWithUUID', Session.get('uuid'), name);
-      Router.go('/game');
+      if (Session.get('rantutorial') === undefined) {
+        Router.go('/tutorial');
+      }
+      else {
+        Router.go('/game');
+      }
     }
     return false; // prevent default form action
   }
