@@ -1,6 +1,12 @@
 // Setup.js
 // Client logic for first run
 
+Template.nameprompt.helpers({
+  name: function() {
+    return Session.get('name');
+  }
+});
+
 Template.nameprompt.events({
   'submit': function(e) {
     var name = $('#name').val();
