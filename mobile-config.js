@@ -1,5 +1,6 @@
 App.info({
   id: 'com.kaulana.scoretto',
+  version: '0.1.0',
   name: 'Scoretto',
   description: 'A shared scorecard for Ligretto™ parties',
   author: 'kaulana.com',

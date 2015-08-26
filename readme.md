@@ -1,4 +1,4 @@
-![Scoretto](https://raw.githubusercontent.com/skaulana/scoretto/master/public/icon180.png)
+![Scoretto](/res/icon180.png?raw=true "Scoretto")
 
 # Scoretto
 
@@ -20,4 +20,4 @@ and this app is in no way affiliated with them.
 
 [1]: https://en.wikipedia.org/wiki/Ligretto
 [2]: https://www.meteor.com/
-[3]: https://github.com/skaulana/scoretto/blob/master/license.md
+[3]: /license.md
