@@ -7,6 +7,13 @@ Template.nameprompt.helpers({
   }
 });
 
+Template.aboutline.helpers({
+  version: function() {
+    // get the x.y from x.y.z semantic version
+    return appSemVer.substring(0, appSemVer.lastIndexOf('.'));
+  }
+});
+
 Template.nameprompt.events({
   'submit': function(e) {
     var name = $('#name').val();
