@@ -47,3 +47,8 @@ p.mini-li {
 .navbar-fixed-bottom {
   padding: 10px 0;
 }
+.aboutlogo {
+  width: 120px;
+  height: 120px;
+  margin: 50px auto;
+}
