@@ -4,6 +4,9 @@
 Template.nameprompt.helpers({
   name: function() {
     return Session.get('name');
+  },
+  lastscore: function() {
+    return Session.get('lastscore');
   }
 });
 
@@ -21,6 +24,7 @@ Template.nameprompt.events({
       // seed a random UUID using persistent device storage
       Session.setPersistent('uuid', uuid.v4());
       Session.setPersistent('name', name);
+      Session.set('lastscore', undefined);
       Meteor.call('connectWithUUID', Session.get('uuid'), name);
       if (Session.get('rantutorial') === undefined) {
         Router.go('/tutorial');

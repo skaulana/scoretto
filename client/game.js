@@ -83,6 +83,7 @@ Template.gameactions.events({
     Meteor.call('toggleReset', Session.get('uuid'));
   },
   'click #exitgame': function(e) {
+    Session.set('lastscore', findMe().score);
     Meteor.call('disconnectWithUUID', Session.get('uuid'));
     Session.set('uuid', undefined);
     Session.set('playerid', undefined);

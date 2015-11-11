@@ -7,6 +7,7 @@
       <h1>Hi ヽ(^ヮ^ヽ)</h1>
       <input type="text" id="name" class="form-control" placeholder="Your name, please" value={{name}} />
       <button type="submit" id="namesubmit" class="btn btn-primary center-block mini-space">Let's play!</button>
+      {{#if lastscore}}<br><p class="text-center"><em>Your last score was {{lastscore}}</em></p>{{/if}}
     </form>
   </div>
 </template>
