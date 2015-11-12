@@ -60,12 +60,12 @@ Template.gameactions.helpers({
 
     if (votePending) {
       if (needOtherVotes) return resetThreshold() + " votes needed to reset scores";
-      else return "Waiting for the server";
+      else return "<img src='/loading.gif'> Waiting for the server";
     }
     else if (noScores) return "";
     else if (needMyScore) return "Waiting for your score from last round";
     else if (needOtherScores) return "Waiting for others to finish scoring";
-    else return "Waiting for the server";
+    else return "<img src='/loading.gif'> Waiting for the server";
   },
   resetcss: function() {
     return iVoted() ? "btn-warning" : "btn-default";
