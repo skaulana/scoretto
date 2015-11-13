@@ -11,3 +11,5 @@ u2622:persistent-session
 jquery
 jaywon:meteor-node-uuid
 twbs:bootstrap
+jparker:crypto-md5
+mdg:geolocation

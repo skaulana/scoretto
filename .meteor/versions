@@ -26,11 +26,14 @@ iron:middleware-stack@1.0.9
 iron:router@1.0.9
 iron:url@1.0.9
 jaywon:meteor-node-uuid@1.0.1
+jparker:crypto-core@0.1.0
+jparker:crypto-md5@0.1.1
 jquery@1.11.3_2
 json@1.0.3
 launch-screen@1.0.2
 livedata@1.0.13
 logging@1.0.7
+mdg:geolocation@1.0.3
 meteor@1.1.6
 meteor-platform@1.2.2
 minifiers@1.1.5
