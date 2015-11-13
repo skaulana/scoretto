@@ -13,5 +13,13 @@
 </template>
 
 <template name="aboutline">
+  <small class="pull-left"><a href="/setup/room">Room #{{room}}</a></small>
   <small class="pull-right"><a href="/about">Scoretto v{{version}}</a></small>
+</template>
+
+<template name="setroom">
+  <form class="form-inline" method="post">
+    <input type="text" id="room" class="form-control" value="{{room}}" maxlength="3" />
+    <button type="submit" id="roomsubmit" class="btn btn-primary">Join this room</button>
+  </form>
 </template>
