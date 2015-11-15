@@ -46,7 +46,7 @@ Template.userlist.helpers({
 
 Template.userlist.events({
   'click li': function(e) {
-    var clickedplayer = $(e.target).data('playerid');
+    var clickedplayer = $(e.currentTarget).data('playerid'); // use currentTarget to ensure data-playerid always binds
     if (clickedplayer == Session.get('uuid')) return false; // don't allow selecting self
     else if (clickedplayer == Session.get('playerid')) Router.go('/game'); // unselect player
     else Router.go('/game/' + clickedplayer); // select player
