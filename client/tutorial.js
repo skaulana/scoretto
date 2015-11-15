@@ -3,7 +3,6 @@
 
 Template.howitworks.events({
   'submit': function(e) {
-    console.log($('#tutorialcheck').prop('checked'));
     if ($('#tutorialcheck').prop('checked')) {
       Session.setPersistent('rantutorial', true);
     }
