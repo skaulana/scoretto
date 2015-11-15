@@ -36,8 +36,9 @@ Template.nameprompt.events({
       // seed a random UUID using persistent device storage
       Session.setPersistent('uuid', uuid.v4());
       Session.setPersistent('name', name);
+      if (Session.get('room') === undefined) Session.set('room', findRoom());
       Session.set('lastscore', undefined);
-      Meteor.call('connectWithUUID', Session.get('uuid'), name);
+      Meteor.call('connectWithUUID', Session.get('uuid'), name, Session.get('room'));
       if (Session.get('rantutorial') === undefined) {
         Router.go('/tutorial');
       }

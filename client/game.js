@@ -2,10 +2,10 @@
 // Client logic for main game (scoreboard) screen
 
 // shorthand DB calls
-function allScored() { return ScoreboardStore.find({lastround: {$exists: true}}).count(); }
-function iScored() { return ScoreboardStore.find({lastround: {$exists: true}, client: Session.get('uuid')}).count(); }
-function allVoted() { return ScoreboardStore.find({reset: {$exists: true}}).count(); }
-function iVoted() { return ScoreboardStore.find({reset: {$exists: true}, client: Session.get('uuid')}).count(); }
+function allScored() { return ScoreboardStore.find({room: Session.get('room'), lastround: {$exists: true}}).count(); }
+function iScored() { return ScoreboardStore.find({room: Session.get('room'), lastround: {$exists: true}, client: Session.get('uuid')}).count(); }
+function allVoted() { return ScoreboardStore.find({room: Session.get('room'), reset: {$exists: true}}).count(); }
+function iVoted() { return ScoreboardStore.find({room: Session.get('room'), reset: {$exists: true}, client: Session.get('uuid')}).count(); }
 function findMe() { return ScoreboardStore.findOne({client: Session.get('uuid')}); }
 
 Template.gametitle.helpers({
@@ -24,8 +24,11 @@ Template.gametitle.helpers({
   
 Template.userlist.helpers({
   players: function() {
-    var players = ScoreboardStore.find({}, {sort: {score: -1}});
-    if (players.count() == 0) Router.go('/setup'); // resets client quickly during debugging
+    var players = ScoreboardStore.find({room: Session.get('room')}, {sort: {score: -1}});
+    if (ScoreboardStore.find({room: Session.get('room'),
+                              client: Session.get('uuid')}).count() == 0) {
+      Router.go('/setup'); // handles if current player left or was booted
+    }
     else return players;
   },
   selectedcss: function() {
@@ -55,11 +58,11 @@ Template.gameactions.helpers({
     var noScores = iScored() == 0 && allScored() == 0;
     var needMyScore = iScored() == 0;
     var votePending = allVoted() != 0;
-    var needOtherScores = allScored() < ScoreboardStore.find().count();
-    var needOtherVotes = allVoted() < ScoreboardStore.find().count();
+    var needOtherScores = allScored() < ScoreboardStore.find({room: Session.get('room')}).count();
+    var needOtherVotes = allVoted() < ScoreboardStore.find({room: Session.get('room')}).count();
 
     if (votePending) {
-      if (needOtherVotes) return resetThreshold() + " votes needed to reset scores";
+      if (needOtherVotes) return resetThreshold(Session.get('room')) + " votes needed to reset scores";
       else return "<img src='/loading.gif'> Waiting for the server";
     }
     else if (noScores) return "";
