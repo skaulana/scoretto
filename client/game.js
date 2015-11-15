@@ -12,7 +12,7 @@ Template.gametitle.helpers({
   title: function() {
     if (iScored() == 0 && allScored() == 0) {
       if (findMe() === undefined) Router.go('/setup'); // you got booted
-      var cards = findMe().cards;
+      var cards = findMe() === undefined ? 10 : findMe().cards;
       return "Deal " + cards + " card" + (cards == 1 ? "" : "s") + ", "
         + Session.get('name');
     }
