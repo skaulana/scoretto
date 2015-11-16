@@ -94,6 +94,13 @@ Template.gameactions.events({
   }
 });
 
+Template.useractions.helpers({
+  bootname: function() {
+    if (this.name) return this.name; // passed as data in routes.js
+    Router.go('/game'); // prevents stale UI if selected player leaves
+  }
+});
+
 Template.useractions.events({
   'click #voteboot': function(e) {
     Meteor.call('bootUUID', Session.get('uuid'), Session.get('playerid'));
