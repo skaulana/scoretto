@@ -31,6 +31,12 @@ Template.userlist.helpers({
     }
     else return players;
   },
+  soloplayer: function() {
+    return ScoreboardStore.find({room: Session.get('room')}).count() == 1;
+  },
+  room: function() {
+    return Session.get('room');
+  },
   selectedcss: function() {
     if (this.client == Session.get('playerid')) return "active"; // TODO: always prefer Session.equals()
     else return "";
