@@ -24,6 +24,14 @@ sendPileSizesByRoom = function(roomNumber) {
       }
       ScoreboardStore.update({client: scores[i].client}, {$set: {cards: newcards}});
     }
+    
+    // then count the round as scored
+    var d = new Date();
+    TelemetryStore.upsert(
+      {year: d.getFullYear(), month: d.getMonth()},
+      {$setOnInsert: {year: d.getFullYear(), month: d.getMonth(), games: 0},
+       $inc: {games: 1}}
+    );
   }
 };
 
