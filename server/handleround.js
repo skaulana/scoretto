@@ -28,9 +28,9 @@ sendPileSizesByRoom = function(roomNumber) {
     // then count the round as scored
     var d = new Date();
     TelemetryStore.upsert(
-      {year: d.getFullYear(), month: d.getMonth()},
-      {$setOnInsert: {year: d.getFullYear(), month: d.getMonth(), games: 0},
-       $inc: {games: 1}}
+      {year: d.getFullYear(), week: d.getWeekNumber()},
+      {$setOnInsert: {year: d.getFullYear(), week: d.getWeekNumber(), rounds: 0},
+       $inc: {rounds: 1}}
     );
   }
 };
