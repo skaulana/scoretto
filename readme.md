@@ -1,4 +1,4 @@
-![Scoretto](/res/icon180.png?raw=true "Scoretto")
+![Scoretto](/res/icon144.png?raw=true "Scoretto")
 
 # Scoretto
 
