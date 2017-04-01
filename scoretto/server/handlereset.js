@@ -10,7 +10,7 @@ resetScoresByRoom = function(roomNumber) {
       >= resetThreshold(roomNumber)) {
     ScoreboardStore.update(
       {room: roomNumber},
-      {$unset: {lastround: "", reset: ""}, $set: {score: 0}},
+      {$unset: {lastround: "", reset: ""}, $set: {score: 0, cards: 10}},
       {multi: true});
   }
 };
