@@ -1,6 +1,6 @@
 App.info({
   id: 'com.kaulana.scoretto',
-  version: '0.3.1',
+  version: '0.3.2',
   name: 'Scoretto',
   description: 'A shared scorecard for Dutch Blitz parties',
   author: 'kaulana.com',
