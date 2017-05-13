@@ -2,7 +2,8 @@
 // Server code to watch for when a majority of players have voted to reset
 
 var resetRoomScores = function(id, fields) {
-  if (fields) return resetScoresByRoom(ScoreboardStore.findOne(id).room);
+  var s = ScoreboardStore.findOne(id);
+  if (fields && s !== undefined) return resetScoresByRoom(s.room);
 };
 
 resetScoresByRoom = function(roomNumber) {
